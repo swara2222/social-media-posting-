@@ -54,7 +54,7 @@ app.post('/post/facebook', async (req, res) => {
   }
 });
 
-// Twitter posting endpoint - demo mode
+// Twitter posting endpoint - show clear instructions
 app.post('/post/twitter', async (req, res) => {
   const { link, description } = req.body;
   
@@ -62,13 +62,11 @@ app.post('/post/twitter', async (req, res) => {
     return res.status(400).json({ error: 'Link and description are required' });
   }
 
-  // Demo mode - simulate successful posting
-  console.log('Demo Twitter Post:', { link, description });
-  
-  res.json({ 
-    success: true, 
-    message: 'Demo: Would post to Twitter successfully! (Real API needs proper setup)',
-    demo: true
+  res.status(501).json({ 
+    error: 'Twitter setup incomplete',
+    details: 'Twitter requires complex OAuth setup with valid URLs. This is challenging for student projects.',
+    suggestion: 'Try Facebook instead - it\'s much easier to set up for learning projects.',
+    demo: `Would post: "${description}" with link: ${link}`
   });
 });
 
