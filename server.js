@@ -22,8 +22,12 @@ app.post('/post/facebook', async (req, res) => {
     }
 
     const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
-    if (!accessToken) {
-      return res.status(500).json({ error: 'Facebook access token not configured' });
+    if (!accessToken || accessToken === 'your_facebook_access_token_here') {
+      return res.status(500).json({ 
+        error: 'Facebook access token not configured',
+        details: 'Please set up Facebook Developer account and get access token',
+        instructions: 'Go to developers.facebook.com → Create App → Get Access Token'
+      });
     }
 
     const message = `${description}\n\n${link}`;
